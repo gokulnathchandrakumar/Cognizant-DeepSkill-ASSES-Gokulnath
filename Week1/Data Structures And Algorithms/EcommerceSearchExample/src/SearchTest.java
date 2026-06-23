@@ -3,8 +3,6 @@ import java.util.Comparator;
 
 public class SearchTest {
     public static void main(String[] args) {
-
-        
         Product[] unsortedProducts = {
             new Product(105, "Wireless Mouse", "Electronics"),
             new Product(102, "Yoga Mat", "Fitness"),

@@ -1,6 +1,5 @@
 public class LoggerTest {
     public static void main(String[] args) {
-
         System.out.println("---- Test 1: Same instance check ----");
         Logger logger1 = Logger.getInstance();
         Logger logger2 = Logger.getInstance();
@@ -11,7 +10,6 @@ public class LoggerTest {
         System.out.println("logger1 count: " + logger1.getLogCount());
         System.out.println("logger2 count: " + logger2.getLogCount());
 
-        
         System.out.println("Are logger1 and logger2 the same instance? "
                 + (logger1 == logger2));
 

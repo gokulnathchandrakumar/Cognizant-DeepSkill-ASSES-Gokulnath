@@ -2,8 +2,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ForecastService {
-
-    
     public double calculateFutureValue(double presentValue, double growthRate, int years) {
         if (years == 0) {
             return presentValue;

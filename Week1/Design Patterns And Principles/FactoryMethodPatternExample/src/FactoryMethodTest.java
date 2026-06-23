@@ -1,6 +1,5 @@
 public class FactoryMethodTest {
     public static void main(String[] args) {
-
         System.out.println("---- Creating a Word Document ----");
         DocumentFactory wordFactory = new WordDocumentFactory();
         Document wordDoc = wordFactory.getDocument();

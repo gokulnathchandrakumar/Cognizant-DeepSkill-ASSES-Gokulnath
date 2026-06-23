@@ -6,8 +6,7 @@ public class Logger {
         logCount = 0;
         System.out.println("Logger instance created!");
     }
- public static Logger getInstance() {
-        
+    public static Logger getInstance() {
         if (instance == null) {
             synchronized (Logger.class) {
                 if (instance == null) {

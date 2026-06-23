@@ -1,6 +1,5 @@
 public class ForecastTest {
     public static void main(String[] args) {
-
         ForecastService service = new ForecastService();
 
         System.out.println("---- Flat Growth Rate Forecast ----");
@@ -25,6 +24,6 @@ public class ForecastTest {
         }
         System.out.println("\nRe-querying Year 5 (should hit cache, no recomputation):");
         double cachedResult = service.calculateFutureValueMemoized(presentValue, growthRate, 5);
-        System.out.printf("Year 5 -> Future Value: %.2f%n", cachedResult);
+        System.out.printf("Year %d -> Future Value: %.2f%n", 5, cachedResult);
     }
 }
