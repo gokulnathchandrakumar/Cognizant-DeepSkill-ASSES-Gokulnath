@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    ================================================================
+    BEAN 1: BookRepository
+    Spring creates ONE instance of BookRepository (Singleton scope)
+    and injects the repositoryType property via setter injection
+    ================================================================
+    -->
+    <bean id="bookRepository"
+          class="com.library.repository.BookRepository">
+
+        <!--
+            SETTER INJECTION — primitive value
+            Spring calls: bookRepository.setRepositoryType("In-Memory Database")
+        -->
+        <property name="repositoryType" value="In-Memory Database"/>
+
+    </bean>
+
+    <!--
+    ================================================================
+    BEAN 2: BookService — Setter Injection (primary approach)
+    Spring creates BookService, then injects bookRepository
+    and serviceName via setter methods
+    ================================================================
+    -->
+    <bean id="bookService"
+          class="com.library.service.BookService">
+
+        <!--
+            SETTER INJECTION — object reference
+            ref="bookRepository" tells Spring to inject
+            the bookRepository bean defined above
+            Spring calls: bookService.setBookRepository(bookRepository)
+        -->
+        <property name="bookRepository" ref="bookRepository"/>
+
+        <!--
+            SETTER INJECTION — string value
+            Spring calls: bookService.setServiceName("Library Service")
+        -->
+        <property name="serviceName" value="Library Service"/>
+
+    </bean>
+
+    <!--
+    ================================================================
+    BEAN 3: BookService — Constructor Injection (alternative approach)
+    Shows how the same class can be wired differently
+    ================================================================
+    -->
+    <bean id="bookServiceConstructor"
+          class="com.library.service.BookService">
+
+        <!--
+            CONSTRUCTOR INJECTION
+            Spring calls the 2-arg constructor:
+            new BookService(bookRepository, "Premium Library Service")
+            index="0" = first constructor arg
+            index="1" = second constructor arg
+        -->
+        <constructor-arg index="0" ref="bookRepository"/>
+        <constructor-arg index="1" value="Premium Library Service"/>
+
+    </bean>
+
+</beans>
