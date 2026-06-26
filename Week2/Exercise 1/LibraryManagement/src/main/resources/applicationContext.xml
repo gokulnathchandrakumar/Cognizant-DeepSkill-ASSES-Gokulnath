@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        Bean Definition for BookRepository
+        id    = unique name to retrieve this bean from the container
+        class = fully qualified class name Spring will instantiate
+    -->
+    <bean id="bookRepository"
+          class="com.library.repository.BookRepository">
+        <!-- Property injection: Spring calls setLibraryName() -->
+        <property name="libraryName" value="City Central Library"/>
+    </bean>
+
+    <!--
+        Bean Definition for BookService
+        Spring creates BookService AND injects bookRepository into it
+        via the ref attribute — this is Dependency Injection via XML
+    -->
+    <bean id="bookService"
+          class="com.library.service.BookService">
+        <!--
+            ref = refers to another bean's id
+            Spring injects the bookRepository bean
+            into BookService's setBookRepository() method
+        -->
+        <property name="bookRepository" ref="bookRepository"/>
+    </bean>
+
+</beans>

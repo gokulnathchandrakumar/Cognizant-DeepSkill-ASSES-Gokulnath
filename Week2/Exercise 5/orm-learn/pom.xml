@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+             http://maven.apache.org/POM/4.0.0
+             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--
+        Spring Boot Parent POM — the most important part.
+        This pre-configures versions for ALL Spring dependencies
+        so you never get version conflicts.
+        You don't need to specify versions for Spring Boot starters.
+    -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.5</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.cognizant</groupId>
+    <artifactId>orm-learn</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>orm-learn</name>
+    <description>Demo project for Spring Data JPA and Hibernate</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+
+        <!--
+            Spring Boot DevTools
+            Enables hot reload during development —
+            restarts the app automatically when code changes
+            scope=runtime: only active during development, not in prod jar
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <!--
+                This single starter pulls in:
+                - spring-data-jpa
+                - hibernate-core (JPA implementation)
+                - spring-orm
+                - spring-jdbc
+                - HikariCP (connection pool)
+                No version needed — parent POM manages it
+            -->
+        </dependency>
+
+        <!--
+            MySQL Driver
+            JDBC driver that allows Java to talk to MySQL
+            scope=runtime: not needed at compile time, only at runtime
+        -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Spring Boot DevTools — hot reload -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <!--
+            Spring Boot Test Starter
+            Pulls in JUnit, Mockito, Spring Test
+            scope=test: only for testing
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--
+                Spring Boot Maven Plugin
+                Enables: mvn spring-boot:run
+                Creates executable jar with embedded Tomcat
+            -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- Java 1.8 compiler config as per exercise -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
