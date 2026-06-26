@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+             http://maven.apache.org/POM/4.0.0
+             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- ============================================================
+         POM MODEL VERSION
+         Always 4.0.0 for Maven 2/3 — don't change this
+    ============================================================ -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- ============================================================
+         PROJECT COORDINATES — uniquely identifies YOUR project
+         groupId    : your organisation/package root
+         artifactId : your project/module name
+         version    : your project version
+                      SNAPSHOT = still in development
+                      RELEASE  = stable, production-ready
+         packaging  : jar (default), war (web app), pom (parent)
+    ============================================================ -->
+    <groupId>com.library</groupId>
+    <artifactId>LibraryManagement</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <!-- Project metadata — optional but good practice -->
+    <name>Library Management System</name>
+    <description>
+        Spring-based Library Management Application
+        demonstrating IoC, DI, AOP, and Spring MVC
+    </description>
+
+    <!-- ============================================================
+         PROPERTIES
+         Centralise version numbers here so you change them in
+         ONE place — not scattered across all dependency tags.
+         Use ${spring.version} to reference anywhere in pom.xml
+    ============================================================ -->
+    <properties>
+        <java.version>1.8</java.version>
+        <spring.version>5.3.23</spring.version>
+        <junit.version>4.13.2</junit.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- ============================================================
+         DEPENDENCIES
+         Everything your project needs to compile and run.
+         Maven downloads these automatically from Maven Central.
+    ============================================================ -->
+    <dependencies>
+
+        <!-- --------------------------------------------------------
+             1. SPRING CONTEXT
+             The core Spring IoC container — provides:
+             ApplicationContext, @Component, @Autowired,
+             bean lifecycle management, @Configuration
+             Transitively pulls in: spring-core, spring-beans,
+             spring-aop, spring-expression
+        -------------------------------------------------------- -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+            <!-- No scope = compile (default) — available everywhere -->
+        </dependency>
+
+        <!-- --------------------------------------------------------
+             2. SPRING AOP
+             Aspect-Oriented Programming support — provides:
+             @Aspect, @Before, @After, @Around advice
+             Used for cross-cutting concerns like logging,
+             security, transactions without touching business code
+             Note: spring-context already pulls this transitively,
+             but declaring it explicitly makes the dependency clear
+        -------------------------------------------------------- -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- AspectJ — required for Spring AOP annotations to work -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.9.1</version>
+        </dependency>
+
+        <!-- --------------------------------------------------------
+             3. SPRING WEBMVC
+             The Spring MVC web framework — provides:
+             @Controller, @RequestMapping, @RestController,
+             DispatcherServlet, ModelAndView
+             Used for building web applications and REST APIs
+        -------------------------------------------------------- -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- Servlet API — required by Spring MVC
+             scope=provided means Tomcat/server provides it at runtime
+             so we don't package it in our jar -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- --------------------------------------------------------
+             4. SPRING TEST
+             Spring testing support — provides:
+             @SpringJUnitConfig, @ContextConfiguration,
+             integration testing with Spring context
+        -------------------------------------------------------- -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- --------------------------------------------------------
+             5. JUNIT
+             Unit testing framework
+             scope=test means it's ONLY available during testing
+             and NOT included in the final packaged jar/war
+        -------------------------------------------------------- -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- --------------------------------------------------------
+             6. SLF4J + LOGBACK
+             Logging framework (same as Week 1)
+             Spring uses SLF4J for its own internal logging
+        -------------------------------------------------------- -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.36</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.11</version>
+        </dependency>
+
+    </dependencies>
+
+    <!-- ============================================================
+         BUILD — configure how Maven builds your project
+    ============================================================ -->
+    <build>
+        <plugins>
+
+            <!-- --------------------------------------------------------
+                 MAVEN COMPILER PLUGIN
+                 Controls which Java version to compile against.
+                 Exercise specifies Java 1.8 (Java 8)
+
+                 source = Java version of your source code
+                 target = Java version of compiled bytecode
+
+                 Without this, Maven defaults to Java 5 syntax
+                 which would break modern Java features
+            -------------------------------------------------------- -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>1.8</source>   <!-- compile Java 8 source -->
+                    <target>1.8</target>   <!-- produce Java 8 bytecode -->
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- --------------------------------------------------------
+                 MAVEN SUREFIRE PLUGIN
+                 Controls how Maven runs your unit tests
+                 mvn test uses this plugin automatically
+            -------------------------------------------------------- -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <!-- Show test output in console during build -->
+                    <useFile>false</useFile>
+                    <includes>
+                        <include>**/*Test.java</include>
+                        <include>**/*Tests.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
+            <!-- --------------------------------------------------------
+                 MAVEN JAR PLUGIN
+                 Configures the final jar that mvn package produces
+                 mainClass tells Java which class to run with java -jar
+            -------------------------------------------------------- -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>
+                                com.library.LibraryManagementApplication
+                            </mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
