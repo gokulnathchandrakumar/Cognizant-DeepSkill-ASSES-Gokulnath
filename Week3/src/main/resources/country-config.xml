@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Spring XML Configuration for Country beans
+    Defines Country objects that will be loaded by Spring
+    and injected into the controller
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    ================================================================
+    INDIA BEAN
+    Defines a Country bean for India
+    Will be loaded and injected into CountryController
+    ================================================================
+    -->
+    <bean id="india"
+          class="com.cognizant.spring_learn.Country">
+        <!--
+            Constructor Injection — passes values to constructor
+            Calls: new Country("IN", "India")
+            index="0" = first constructor arg (code)
+            index="1" = second constructor arg (name)
+        -->
+        <constructor-arg index="0" value="IN"/>
+        <constructor-arg index="1" value="India"/>
+    </bean>
+
+    <!--
+    Additional country beans for demonstration
+    -->
+    <bean id="usa"
+          class="com.cognizant.spring_learn.Country">
+        <constructor-arg index="0" value="US"/>
+        <constructor-arg index="1" value="United States of America"/>
+    </bean>
+
+    <bean id="uk"
+          class="com.cognizant.spring_learn.Country">
+        <constructor-arg index="0" value="UK"/>
+        <constructor-arg index="1" value="United Kingdom"/>
+    </bean>
+
+    <bean id="australia"
+          class="com.cognizant.spring_learn.Country">
+        <constructor-arg index="0" value="AU"/>
+        <constructor-arg index="1" value="Australia"/>
+    </bean>
+
+</beans>
