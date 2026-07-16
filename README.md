@@ -33,6 +33,24 @@ This repository contains the hands-on exercises and projects completed during th
 - REST Communication
 - Independent Service Deployment
 
+## 📅 Week 5 – React
+
+- React Fundamentals & Project Setup (Vite + Create React App)
+- Component-Based Architecture (Functional Components, Props, State)
+- Event Handling & Conditional Rendering
+- React Hooks (useState)
+- React Applications:
+  - **My First React** – Introduction to React with Vite
+  - **Blog App** – Blog listing application
+  - **Blogger App** – Blogging platform
+  - **Cohort Dashboard** – Dashboard for cohort management
+  - **Cricket App** – Cricket score/stats application
+  - **Event Examples App** – Click events, counter, currency converter
+  - **Office Space Rental App** – Office space rental management
+  - **Score Calculator App** – Score calculation with styled components
+  - **Student App** – Student management with routing
+  - **Ticket Booking App** – Ticket booking with conditional rendering
+
 ---
 
 ## 🛠️ Technologies Used
@@ -45,12 +63,16 @@ This repository contains the hands-on exercises and projects completed during th
 - MySQL
 - JUnit
 - SLF4J & Logback
+- React.js
+- JavaScript (ES6+)
+- Vite
+- HTML & CSS
 
 ---
 
 ## 🎯 Objective
 
-To strengthen my Java Full Stack development skills by implementing real-world applications using **Java, Spring Framework, REST APIs, and Microservices** through practical hands-on exercises.
+To strengthen my Java Full Stack development skills by implementing real-world applications using **Java, Spring Framework, REST APIs, Microservices, and React** through practical hands-on exercises.
 
 ---
 
